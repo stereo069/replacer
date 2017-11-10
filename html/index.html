@@ -1,0 +1,53 @@
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="awesome/css/font-awesome.min.css"/>
+  <script type="text/javascript" src="js/jquery-1.12.4.js">
+  </script>
+  <script type="text/javascript" src="js/main.js">
+  </script>
+</head>
+<body>
+  <div class="frequence">
+    <div class="hideFrequence">
+      <i id="frequenceArrow" class="fa fa-angle-double-down fa-3x" aria-hidden="true"></i>
+    </div>
+    <div class="FreqTextBlock">
+      <p class="frequenceText">
+    </p>
+    </div>
+  </div>
+  <div class="mainBlock">
+  <div class="coderTextBlock" id="coderTextBlock">
+    <textarea class="text" id="coderText"></textarea>
+  </div>
+  <div class="replaceBar">
+    <div class="newReplaceBar">
+      <input class="codeReplace" id="CLetter">
+      </input>
+        <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+      <input class="letterReplace" id="RLetter">
+      </input>
+      <i id="apply" class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i>
+    </div>
+    <div class="historyReplaceBar">
+      <ul class="listHistory">
+        <template id="templateHistory">
+        <li class="liReplace">
+          <div class="itemReplaceBar">
+            <input class="codeReplace"  value="45">
+            </input>
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            <input class="letterReplace"  value="A">
+            </input>
+            <i class="fa fa-reply" id="reply" aria-hidden="true"></i>
+          </div>
+        </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
