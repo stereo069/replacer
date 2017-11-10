@@ -46,9 +46,9 @@ $(document).ready(function() {
   $('#apply').click(function() {
     var codLetter = $('#CLetter').val();
     var replaceletter = $('#RLetter').val();
-    text = text.replaceAll(codLetter,replaceletter);
-    text = text.replaceAll(codLetter,replaceletter);
-    $('#coderText').html(text);
+    $('.letter-'+codLetter).html(replaceletter);
+    $('.letter-'+codLetter).css('color','red');
+    //$('#coderText').html(text);
     var li = document.createElement('li');
     li.className = "liReplace";
     var id = "#item-"+index;
@@ -59,12 +59,13 @@ $(document).ready(function() {
     $(id+' .codeReplace').val($('#CLetter').val());
     $(id+' .letterReplace').val($('#RLetter').val());
     $(id+' .itemReplaceBar #reply').click(function() {
-
       var replaceletter = $(id+' .itemReplaceBar .letterReplace').val();
       var codLetter = $(id+' .itemReplaceBar .codeReplace').val();
-      text = text.replaceAll(replaceletter,codLetter);
-      text = text.replaceAll(replaceletter,codLetter);
-      $('#coderText').html(text);
+      $('.letter-'+codLetter).html(codLetter);
+      $('.letter-'+codLetter).css('color','#008fff');
+      //text = text.replaceAll(replaceletter,codLetter);
+      //text = text.replaceAll(replaceletter,codLetter);
+      //$('#coderText').html(text);
       $(id).remove();
     });
   });
@@ -79,12 +80,21 @@ String.prototype.replaceAll = function(search, replacement) {
 function getCodText() {
   $.get("getText.php",function(data){
     text=data;
-    $('#coderText').html(data);
+    var arrData = data.split(";");
+    arrData.forEach(function callback(currentValue, index, array) {
+      $('#coderTextBlock').append("<span class =\"letter letter-"+currentValue+"\">"+currentValue+"</span>");
+    });
+
   })
 }
 
 function getFrequence() {
   $.get("getFrequence.php",function(data){
-    $('.frequenceText').html(data);
+
+    var arrData = data.split('\n');
+    arrData.forEach(function callback(currentValue, index, array) {
+      $('.frequenceText').append("<p>"+currentValue+"</p>");
+    });
+
   })
 }
