@@ -33,15 +33,12 @@ namespace Linear_code
 
                 if(text_char[i] == ' ')
                 {
-                    wr.Write(' ');
-                }
-                else
-                {
-                    wr.Write("-");
+                    wr.Write(" ;");
                 }
                 if (text_char[i] == '.' || text_char[i] == ',')
                 {
                     wr.Write(text_char[i]);
+                    wr.Write(";");
                     continue;
                 }
                 int j;
@@ -58,6 +55,7 @@ namespace Linear_code
                 int d2 = (c1 * matrix[0, 1] + c2 * matrix[1, 1]) % 10;
                 wr.Write(d1);
                 wr.Write(d2);
+                wr.Write(";");
             }
             wr.Close();
         }
