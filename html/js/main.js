@@ -50,6 +50,7 @@
     $('#apply').click(function() {
       var codLetter = $('#CLetter').val();
       var replaceletter = $('#RLetter').val();
+      if(codLetter=='' || replaceletter=='') return;
       $('.letter-' + codLetter).html(replaceletter);
       $('.letter-' + codLetter).css('color', '#f16950');
       //$('#coderText').html(text);
@@ -66,7 +67,11 @@
         var replaceletter = $(id + ' .itemReplaceBar .letterReplace').val();
         var codLetter = $(id + ' .itemReplaceBar .codeReplace').val();
         $('.letter-' + codLetter).html(codLetter);
-        $('.letter-' + codLetter).css('color', '#008fff');
+        if(beforeClickItem==null || codLetter != beforeClickItem.innerHTML)
+          $('.letter-' + codLetter).css('color', '#008fff');
+          else {
+            $('.letter-' + codLetter).css('color', 'white');
+          }
         //text = text.replaceAll(replaceletter,codLetter);
         //text = text.replaceAll(replaceletter,codLetter);
         //$('#coderText').html(text);
@@ -112,6 +117,7 @@
         if (index == array.length - 1) {
           updateFrequency();
           $(".letter").click(function(e) {
+
             if ($(this).html() != '.' && $(this).html() != ',' && $(this).html() != ' ') {
               if (beforeClickItem != null) {
                 var beforeClass = "." + beforeClickItem.className.split(" ")[1];
@@ -121,14 +127,23 @@
                 } else {
                   $(beforeClass).css('color', '#008fff');
                 }
-              }
 
+              }
+              $('.letter').css('opacity','1');
+              if(beforeClickItem!=null && beforeClickItem.innerHTML  == this.innerHTML){
+
+                beforeClickItem = null
+                return;
+              }else{
+                $('.letter').css('opacity','0.5');
+              }
               var className = "." + this.className.split(" ")[1];
               $(className).css('background-color', '#008fff');
 
               if (className.split("-")[1] == $(this).html()) {
                 $('#CLetter').val($(this).html());
                 $(className).css('color', 'white');
+                $(className).css('opacity','1');
                 var index = 0;
                 if($(this).html()[0]=='0')
                 index = $(this).html()[1];
@@ -138,8 +153,7 @@
                 $('.letterFreq').html($(this).html());
                 $('.Freq').html(Math.round(frequencyArray[index][1]*10000)/100+"%");
               } else {
-
-
+                $(className).css('opacity','1');
                 $(className).css('color', '#f16950');
               }
 
