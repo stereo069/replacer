@@ -1,3 +1,23 @@
+
+::-webkit-scrollbar {
+    width:  8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a1a1a1;
+
+    border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+}
+
 body{
   margin: 0;
   padding: 0;
@@ -33,13 +53,24 @@ border: 2px solid #33abe5;
 
 .ShowFreq{
   font-size: 40px;
+  height: 100%;
+  width: 100%;
   color: #4f4f4f;
   text-align: center;
-  margin-top: 8%;
+    overflow: hidden;
+
 }
 
-.ShowFreq span{
-  margin-left: 20px;
+.letterFreqBlock{
+  height: 100%;
+  width: 49%;
+  float: left;
+  padding-top: 5%;
+  border-right: 1px solid #008fff;
+}
+
+.noborder{
+  border: none;
 }
 
 .frequenceLetter{
@@ -304,4 +335,8 @@ input{
   color: #008fff;
   font-size: 20px;
   margin-right: 5px;
+  border-radius: 2px 2px 2px 2px;
+-moz-border-radius: 2px 2px 2px 2px;
+-webkit-border-radius: 2px 2px 2px 2px;
+border: 0px solid #000000;
 }

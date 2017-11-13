@@ -90,7 +90,7 @@
     $.get("getText.php", function(data) {
       text = data;
       var arrData = data.split(";");
-      arrData.forEach(function callback(currentValue, index, array) {
+      arrData.forEach(function callback(currentValue, i, array) {
 
         var span = document.createElement('span');
         span.className = "letter letter-" + currentValue;
@@ -114,7 +114,7 @@
           }
         }
 
-        if (index == array.length - 1) {
+        if (i == array.length - 1) {
           updateFrequency();
           $(".letter").click(function(e) {
 
