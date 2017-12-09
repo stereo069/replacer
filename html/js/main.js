@@ -5,16 +5,18 @@
   var beforeClickItem;
   var frequencyArray = [];
   var countLetter = 0;
+  var arrbg;
   $(document).ready(function() {
     getCodText();
     getFrequence();
+    setbgramms();
     $('.hideFrequence').click(function() {
       if (isHide) {
         $('.frequence').css('margin-top', '50vh');
         $('#frequenceArrow').css('transform', 'rotate(0deg)');
         isHide = false;
       } else {
-        $('.frequence').css('margin-top', '94vh');
+        $('.frequence').css('margin-top', '95vh');
         $('#frequenceArrow').css('transform', 'rotate(180deg)');
         isHide = true;
       }
@@ -51,7 +53,14 @@
       var codLetter = $('#CLetter').val();
       var replaceletter = $('#RLetter').val();
       if(codLetter=='' || replaceletter=='') return;
+      if(!expectbgramm($('.letter-' + codLetter),replaceletter)){
+        $('#RLetter').css("border-color","red");
+        return;
+      }else{
+        $('#RLetter').css("border-color","#33abe5");
+      }
       $('.letter-' + codLetter).html(replaceletter);
+      $('.letter-' + codLetter).prop("word",true);
       $('.letter-' + codLetter).css('color', '#f16950');
       //$('#coderText').html(text);
       var li = document.createElement('li');
@@ -66,7 +75,9 @@
       $(id + ' .itemReplaceBar #reply').click(function() {
         var replaceletter = $(id + ' .itemReplaceBar .letterReplace').val();
         var codLetter = $(id + ' .itemReplaceBar .codeReplace').val();
+
         $('.letter-' + codLetter).html(codLetter);
+        $('.letter-' + codLetter).prop("word",false);
         if(beforeClickItem==null || codLetter != beforeClickItem.innerHTML)
           $('.letter-' + codLetter).css('color', '#008fff');
           else {
@@ -85,6 +96,31 @@
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
   };
+
+  function expectbgramm(words,newWord) {
+     for(var i=0;i<words.length;++i){
+       var node = words[i];
+       var prev = node.previousSibling;
+       var next = node.nextSibling;
+       var oneBg = prev.innerHTML+newWord;
+       var twoBg = newWord+next.innerHTML;
+       if(prev.localName == "span" && $(prev).prop("word")){
+        if(arrbg[oneBg] == null){
+          $(node).css('background-color', 'black');
+          $(prev).css('background-color', 'black');
+          return false;
+        }
+      }
+      if(next.localName == "span" && $(next).prop("word")){
+        if(arrbg[twoBg] == null){
+          $(node).css('background-color', 'black');
+          $(next).css('background-color', 'black');
+          return false;
+        }
+      }
+     }
+     return true;
+  }
 
   function getCodText() {
     $.get("getText.php", function(data) {
@@ -182,5 +218,12 @@
         $('.frequenceText').append("<p>" + currentValue + "</p>");
       });
 
+    })
+  }
+
+  function setbgramms() {
+    $.get("getbgramm.php", function(data) {
+      arrbg = JSON.parse(data);
+      var c = arrbg.length;
     })
   }

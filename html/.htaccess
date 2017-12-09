@@ -1,0 +1,7 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} !=/index.html
+RewriteCond %{REQUEST_URI} !=/getText.php
+RewriteCond %{REQUEST_URI} !=/getFrequence.php
+RewriteCond %{REQUEST_URI} !=/getbgramm.php
+RewriteRule ^ - [F,L]
